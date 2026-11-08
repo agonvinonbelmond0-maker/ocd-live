@@ -1,0 +1,8 @@
+{
+  "name": "ocd-live",
+  "version": "2.0.0",
+  "description": "Site de réservation des lives OCD",
+  "private": true,
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}

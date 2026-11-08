@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OCD – Administration</title><link rel="stylesheet" href="/css/style.css">
+<style>table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut)}.sc{overflow-x:auto}.mini{padding:6px 12px;font-size:.82rem;margin:2px}.st{border-color:var(--line)}.top{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:18px 0}input{font:inherit;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}</style></head>
+<body><div class="wrap pad"><h1>Réservations OCD</h1>
+<div class="top" id="login"><input id="pw" type="password" placeholder="Mot de passe administrateur"><button class="btn" id="go">Entrer</button><span class="err" id="e"></span></div>
+<div id="list" class="hid sc"></div></div>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let PW="";const H=()=>({"x-admin-password":PW,"Content-Type":"application/json"});
+async function load(){const r=await fetch("/api/admin/bookings",{headers:H()});if(!r.ok){$("#e").textContent="Mot de passe incorrect.";return}
+ const a=await r.json();$("#login").classList.add("hid");$("#list").classList.remove("hid");
+ $("#list").innerHTML=a.length?`<p class="mut">${a.length} réservation(s)</p><table><tr><th>Réf.</th><th>Date</th><th>Client</th><th>Package</th><th>Paiement</th><th>Statut</th><th></th></tr>${a.map(b=>`<tr><td>${esc(b.ref)}</td><td>${esc(b.date)}<br>${esc(b.heure)}–${esc(b.fin)}</td><td>${esc(b.nom)}<br>${esc(b.tel)}<br>${esc(b.email)}</td><td>${esc(b.pack)}<br>${esc(b.mode)}<br>${b.prix.toLocaleString("fr-FR")} FCFA</td><td>${esc(b.paiement)}<br>${esc(b.payTel)} ${esc(b.payRef)}</td><td>${esc(b.status)}</td><td>${b.status==="annulé"?"":`<button class="btn mini" data-r="${esc(b.ref)}" data-s="confirmé">Confirmer</button><button class="btn ghost mini" data-r="${esc(b.ref)}" data-s="annulé">Annuler</button>`}</td></tr>`).join("")}</table>`:"<p>Aucune réservation pour le moment.</p>"}
+$("#go").onclick=()=>{PW=$("#pw").value;load()};$("#pw").onkeydown=e=>{if(e.key==="Enter")$("#go").click()};
+$("#list").onclick=async e=>{const b=e.target.closest("[data-r]");if(!b)return;if(b.dataset.s==="annulé"&&!confirm("Annuler cette réservation ? Le créneau sera libéré."))return;
+ await fetch("/api/admin/bookings/"+b.dataset.r,{method:"PATCH",headers:H(),body:JSON.stringify({status:b.dataset.s})});load()};
+</script></body></html>

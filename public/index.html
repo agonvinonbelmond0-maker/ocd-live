@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OCD Live – Réservez votre live</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap bar">
+  <a class="brand" href="#"><img src="assets/logo.png" alt="OCD"><span>Live</span></a>
+  <nav><a href="#how">Comment ça marche</a><a href="#tarifs-s">Tarifs</a><a href="#contact">Contact</a></nav>
+  <a class="btn sm" href="#choix">Réserver</a>
+</div></header>
+
+<main>
+  <section class="hero wrap">
+    <div class="ht">
+      <span class="pill"><span class="rec" aria-hidden="true"></span>Lives vendeurs</span>
+      <h1>Les opportunités,<br><em>c’est dehors.</em></h1>
+      <p class="lead">Bienvenue chez OCD. Notre équipe anime et diffuse votre live sur notre compte. Vous choisissez la date, et vous vendez.</p>
+      <h2 class="q" id="choix">Quel type de live souhaitez-vous ?</h2>
+      <div class="choices">
+        <button class="choice" data-mode="presentiel">
+          <span class="cx"><span class="ct">Live présentiel</span><span class="cd">Vous venez sur place, l’équipe OCD anime votre live.</span><span class="cf">À partir de <b id="from-presentiel">…</b></span></span>
+          <span class="cb">Réserver</span>
+        </button>
+        <button class="choice" data-mode="distance">
+          <span class="cx"><span class="ct">Live à distance</span><span class="cd">Vous participez en visio depuis chez vous.</span><span class="cf">À partir de <b id="from-distance">…</b></span></span>
+          <span class="cb">Réserver</span>
+        </button>
+      </div>
+      <p class="offline hid" id="offline">Le serveur ne répond pas. Lancez-le avec <b>npm start</b>, puis ouvrez <b>http://localhost:3000</b>.</p>
+    </div>
+    <div class="phone" aria-hidden="true">
+      <div class="pt"><span class="av"><img src="assets/logo.png" alt=""></span><span><b>OCD</b><br><small>Live</small></span><span class="live">LIVE</span></div>
+      <div class="stage"><img src="assets/logo.png" alt=""></div>
+      <div class="chat"><span><b>Abla</b> Je commande</span><span><b>Afi</b> C’est combien ?</span><span><b>Kossi</b> Il reste en taille L ?</span><span><b>Ama</b> Je prends 2 !</span></div>
+      <div class="buy"><i class="thumb"></i><span><b>Ensemble wax</b>12 500 FCFA</span><u>Acheter</u></div>
+    </div>
+  </section>
+
+  <section class="band" id="how"><div class="wrap">
+    <h2>Comment ça marche</h2>
+    <ol class="how">
+      <li><b>1</b><h3>Vos informations</h3><p>Nom, téléphone et e-mail. Deux minutes suffisent.</p></li>
+      <li><b>2</b><h3>Votre package</h3><p>À l’heure, à la semaine ou au mois, selon votre besoin.</p></li>
+      <li><b>3</b><h3>Votre créneau</h3><p>Le calendrier montre en direct les créneaux libres et occupés.</p></li>
+      <li><b>4</b><h3>Paiement et ticket</h3><p>Réglez par Mobile Money et téléchargez votre récapitulatif.</p></li>
+    </ol>
+  </div></section>
+
+  <section class="wrap tarifs" id="tarifs-s">
+    <h2>Nos tarifs</h2><p class="mut">Choisissez l’offre qui correspond à votre besoin : à l’heure, à la semaine ou au mois.</p>
+    <div class="tgrid" id="tarifs"></div>
+    <p style="margin-top:26px"><a class="btn" href="#choix">Réserver mon live</a></p>
+  </section>
+</main>
+
+<footer id="contact"><div class="wrap">
+  <h2>Contact</h2>
+  <div class="contacts" id="contacts"></div>
+</div></footer>
+
+<!-- Formulaire de réservation (popup) -->
+<div class="modal hid" id="modal" role="dialog" aria-modal="true" aria-labelledby="mt">
+  <div class="sheet">
+    <div class="mh"><div><b id="mt"></b><small id="sn"></small></div><button class="x" id="x" aria-label="Fermer">×</button></div>
+    <div class="prog"><i id="bar"></i></div>
+    <div class="mb" id="mb"></div>
+    <div class="mf"><button class="btn ghost" id="prev">Retour</button><button class="btn" id="next">Continuer</button></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
