@@ -51,10 +51,13 @@ const PUB = path.join(ROOT, "public");
 // Stockage des réservations
 // En local : data/bookings.json
 // Sur Vercel : /tmp/bookings.json (stockage temporaire uniquement)
-const DATA_DIR = IS_VERCEL ? "/tmp" : path.join(ROOT, "data");
+
+// Stockage temporaire autorisé sur Vercel
+const DATA_DIR = "/tmp";
 const FILE = path.join(DATA_DIR, "bookings.json");
 
 fs.mkdirSync(DATA_DIR, { recursive: true });
+
 
 // Chargement des réservations
 const load = () => {
